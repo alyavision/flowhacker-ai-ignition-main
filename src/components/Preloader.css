@@ -1,0 +1,226 @@
+/* Анимации прелоадера */
+
+/* T1: Анимация бренда (0.8-2.0c) */
+.animate-brand {
+  animation: brandAppear 1.2s cubic-bezier(0.2,0.7,0,1) forwards;
+}
+
+@keyframes brandAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+    letter-spacing: 0.15em;
+  }
+  30% {
+    opacity: 0.4;
+    transform: scale(0.88);
+    letter-spacing: 0.1em;
+  }
+  70% {
+    opacity: 0.8;
+    transform: scale(0.96);
+    letter-spacing: 0.04em;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    letter-spacing: 0.02em;
+  }
+}
+
+/* T2: Анимация stroke (0.5-1.6c) */
+.animate-stroke {
+  animation: strokeDraw 0.8s cubic-bezier(0.2,0.7,0,1) forwards;
+}
+
+@keyframes strokeDraw {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* T3: Анимация прогресса */
+@keyframes progressOvershoot {
+  0% {
+    transform: scaleX(1);
+  }
+  90% {
+    transform: scaleX(1.05);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* T4: Исчезновение прелоадера */
+.preloader-hidden {
+  opacity: 0;
+  backdrop-filter: blur(6px);
+  transform: scale(0.95);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* T5: Появление главной */
+body.is-ready [data-fade] {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.is-ready [data-fade].fade-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Анимация точек */
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.blink-dot {
+  animation: blink 0.12s ease-in-out infinite;
+}
+
+/* Улучшенные hover эффекты для карточек */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Улучшенные hover эффекты для иконок */
+.icon-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-hover:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 12px rgba(155, 239, 76, 0.6));
+}
+
+/* Улучшенные hover эффекты для кнопок */
+.button-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Анимации появления */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Классы анимаций */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+/* Состояния по умолчанию */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-on-scroll.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fallback для случаев, когда анимации не работают */
+@supports not (animation: brandAppear 0.7s cubic-bezier(0.2,0.7,0,1)) {
+  .animate-brand,
+  .animate-stroke,
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-scale-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .preloader-logo {
+    font-size: 3rem;
+  }
+  
+  .preloader-progress {
+    width: 280px;
+  }
+}
+
+/* Поддержка prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-brand,
+  .animate-stroke,
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-scale-in,
+  .card-hover,
+  .icon-hover,
+  .button-hover {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .preloader {
+    animation-duration: 0.8s !important;
+  }
+}

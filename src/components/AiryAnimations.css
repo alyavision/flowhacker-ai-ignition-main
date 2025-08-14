@@ -1,0 +1,282 @@
+/* Воздушные анимации для кнопок и плашек */
+
+/* Базовые состояния для всех интерактивных элементов */
+.airy-element {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+  will-change: transform, box-shadow, filter;
+}
+
+/* Состояние покоя - легкая тень */
+.airy-element:not(:active):not(:focus) {
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Hover эффект - подъем и мягкая тень */
+.airy-element:hover:not(:active) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Активное состояние - нажатие */
+.airy-element:active {
+  transform: translateY(1px) scale(0.98);
+  transition: all 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Фокус состояние */
+.airy-element:focus-visible {
+  outline: 2px solid rgba(155, 239, 76, 0.6);
+  outline-offset: 2px;
+}
+
+/* Специальные стили для кнопок */
+.airy-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Эффект волны при нажатии */
+.airy-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  pointer-events: none;
+}
+
+.airy-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Подсветка при нажатии */
+.airy-button:active {
+  filter: brightness(1.1) saturate(1.2);
+  box-shadow: 
+    0 0 20px rgba(155, 239, 76, 0.4),
+    0 0 40px rgba(155, 239, 76, 0.2);
+}
+
+/* Специальные стили для карточек/плашек */
+.airy-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hover эффект для карточек */
+.airy-card:hover:not(:active) {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: rgba(155, 239, 76, 0.3);
+}
+
+/* Активное состояние для карточек */
+.airy-card:active {
+  transform: translateY(-1px) scale(0.99);
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 
+    0 0 30px rgba(155, 239, 76, 0.3),
+    0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Эффект свечения для карточек при нажатии */
+.airy-card:active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(155, 239, 76, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  animation: cardGlow 0.3s ease-out;
+}
+
+@keyframes cardGlow {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+/* Специальные стили для ссылок */
+.airy-link {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.airy-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #9BEF4C, #00D4FF);
+  transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.airy-link:hover::after {
+  width: 100%;
+}
+
+.airy-link:active {
+  transform: scale(0.98);
+  filter: brightness(1.2);
+}
+
+/* Специальные стили для иконок */
+.airy-icon {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.airy-icon:hover {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 0 8px rgba(155, 239, 76, 0.6));
+}
+
+.airy-icon:active {
+  transform: scale(0.95) rotate(-2deg);
+  filter: drop-shadow(0 0 15px rgba(155, 239, 76, 0.8));
+}
+
+/* Анимация появления элементов */
+@keyframes airyAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.airy-appear {
+  animation: airyAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Улучшение четкости текста */
+.airy-element {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1;
+}
+
+/* Специально для pricing карточек */
+.airy-element li {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1;
+  filter: none !important;
+  transform: none !important;
+  will-change: auto;
+}
+
+/* Принудительное отключение размытия для текста */
+.airy-element li,
+.airy-element span,
+.airy-element div {
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Анимация пульсации для привлечения внимания */
+@keyframes airyPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(155, 239, 76, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(155, 239, 76, 0);
+  }
+}
+
+.airy-pulse {
+  animation: airyPulse 2s infinite;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .airy-element:hover:not(:active) {
+    transform: translateY(-1px) scale(1.01);
+  }
+  
+  .airy-card:hover:not(:active) {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+/* Поддержка prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .airy-element,
+  .airy-button,
+  .airy-card,
+  .airy-link,
+  .airy-icon {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  .airy-element::before,
+  .airy-card::after {
+    display: none !important;
+  }
+}
+
+/* Дополнительные эффекты для градиентных кнопок */
+.airy-gradient-button {
+  background: linear-gradient(135deg, #9BEF4C, #00D4FF);
+  position: relative;
+  overflow: hidden;
+}
+
+.airy-gradient-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.airy-gradient-button:hover::before {
+  left: 100%;
+}
+
+.airy-gradient-button:active {
+  background: linear-gradient(135deg, #8ADF3B, #00C4EF);
+  transform: scale(0.98);
+  box-shadow: 
+    0 0 25px rgba(155, 239, 76, 0.5),
+    0 0 50px rgba(0, 212, 255, 0.3);
+}
