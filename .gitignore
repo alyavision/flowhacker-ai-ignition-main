@@ -28,5 +28,5 @@ node_modules/
 dist/
 *.lockb
 *.pdf
-public/images/*.jpg
-public/images/*.png
+public/images/case*.png
+public/images/og-banner.png
