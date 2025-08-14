@@ -151,15 +151,15 @@ const Index = () => {
             ))}
           </div>
           
-          <div className="container mx-auto grid items-center gap-6 sm:gap-8 py-16 sm:py-24 md:py-32">
-            <h1 className="font-orbitron text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight uppercase airy-element" data-fade>
+          <div className="container mx-auto grid items-center gap-6 sm:gap-8 py-12 sm:py-20 md:py-28">
+            <h1 className="font-orbitron text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight uppercase text-center airy-element" data-fade>
               <span className="bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">
                 ВАШ БИЗНЕС НА АВТОПИЛОТЕ
               </span>
               <span className="text-white airy-element"> С ИИ</span>
             </h1>
             
-            <p className="max-w-3xl text-base sm:text-lg text-muted-foreground airy-element" data-fade>
+            <p className="max-w-3xl text-base sm:text-lg text-muted-foreground text-center mx-auto airy-element" data-fade>
               Превращаем ваш бизнес в умную машину продаж: ИИ-продавцы, автоматические рассылки и воронки, которые работают 24/7, пока вы отдыхаете или занимаетесь любимыми делами.
             </p>
             
@@ -184,7 +184,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="text-center max-w-5xl mx-auto space-y-2">
+            <div className="text-center max-w-5xl mx-auto space-y-2 mb-6">
               <p className="text-xl airy-element">
                 <span className="bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">
                   <span className="font-semibold airy-element">Результат: +40–60% к продажам</span>
@@ -202,7 +202,7 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4" data-fade>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-fade>
               <Button variant="secondary" size="xl" className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold">
                 <Sparkles className="size-4 sm:size-5 mr-2 airy-icon"/> Получить бесплатный AI-аудит
               </Button>
@@ -223,12 +223,12 @@ const Index = () => {
           </div>
         </section>
 
-        <div className="mx-auto w-32 my-16 h-px bg-gradient-to-r from-transparent via-sky-500 to-transparent airy-element" />
+        <div className="mx-auto w-32 my-4 sm:my-8 h-px bg-gradient-to-r from-transparent via-sky-500 to-transparent airy-element" />
 
         {/* Services */}
-        <section id="services" className="container mx-auto py-16 md:py-24 relative z-[2] bg-[#0A0A0A]/70" data-fade>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-orbitron mb-8 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">
-            Наши услуги
+        <section id="services" className="container mx-auto py-6 sm:py-12 md:py-20 relative z-[2] bg-[#0A0A0A]/70" data-fade>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-orbitron mb-8 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent text-center uppercase airy-element">
+            НАШИ УСЛУГИ
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card className="border-0 bg-gradient-to-br from-gray-900/50 to-gray-800/50 backdrop-blur-sm" role="article">
@@ -365,7 +365,7 @@ const Index = () => {
 
         {/* Pricing */}
         <section id="pricing" className="container mx-auto py-16 md:py-24 bg-[#0A0A0A]/70 relative z-[2]" data-fade>
-          <h2 className="text-2xl sm:text-3xl font-bold font-orbitron mb-8 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">Пакеты — начните быстро</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold font-orbitron mb-8 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent text-center uppercase airy-element">ПАКЕТЫ — НАЧНИТЕ БЫСТРО</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {[
               {name:'Start', price:'от 2 500 000 UZS', features:['Мини-чат-бот (Q&A)','Базовая интеграция','Индивидуальные сценарии','1 мес поддержки'], cta:'Заказать консультацию'},
@@ -396,7 +396,7 @@ const Index = () => {
 
         {/* Why us */}
         <section id="why" className="container mx-auto py-16 md:py-24 bg-[#0A0A0A]/70 relative z-[2]">
-          <h2 className="text-2xl sm:text-3xl font-bold font-orbitron mb-8 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">Почему мы</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold font-orbitron mb-8 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent text-center uppercase airy-element">ПОЧЕМУ МЫ</h2>
           <div className="grid gap-6 md:grid-cols-3">
                                                     <Card><CardHeader><CardTitle className="flex items-center gap-2 airy-element text-base sm:text-lg">
                                                       <div className="airy-pulse">
@@ -423,7 +423,7 @@ const Index = () => {
 
         {/* FAQ */}
         <section id="faq" className="container mx-auto py-16 md:py-24 bg-[#0A0A0A]/70 relative z-[2]" data-fade>
-          <h2 className="text-2xl sm:text-3xl font-bold font-orbitron mb-6 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">FAQ — Часто задаваемые вопросы</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold font-orbitron mb-6 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent text-center uppercase airy-element">FAQ — ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ</h2>
           <Accordion type="single" collapsible className="w-full">
             {[
               {q:'Сроки запуска', a:'Мы создаём рабочую версию продукта (MVP) в среднем за 7–14 дней. Точный срок зависит от сложности проекта и количества интеграций. Для небольших решений — быстрее, для комплексных систем с API и автоматизацией — чуть дольше. Мы заранее согласуем дедлайны и фиксируем их в договоре, чтобы вы знали, когда получите готовый продукт.'},
@@ -524,24 +524,7 @@ const Index = () => {
 
       {/* Floating chat buttons — удалены по требованию */}
 
-      {/* Mobile bottom bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-[60] md:hidden border-t border-border bg-[#0A0A0A]/90 backdrop-blur" data-fade>
-        <div className="container mx-auto grid grid-cols-2 gap-2 p-2">
-                      <a href="tel:+998000000000"><Button className="w-full airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold" variant="secondary"><Phone className="mr-2 airy-icon"/> Позвонить</Button></a>
-          <Button
-            onClick={() => {
-              if (IS_TG_READY) {
-                try { window.open(TG_LINK, "_blank"); } catch {}
-              } else {
-                toast({ title: "Скоро", description: "Telegram-бот в разработке." });
-              }
-            }}
-                         className="w-full airy-gradient-button bg-cyan-400 hover:bg-cyan-500 text-black font-semibold" variant="outline"
-          >
-            <MessageCircle className="mr-2"/> Telegram
-          </Button>
-        </div>
-      </div>
+
 
       {/* Lead magnet popup — удалён по требованию */}
     </div>

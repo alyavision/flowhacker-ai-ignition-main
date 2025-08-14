@@ -1,226 +1,57 @@
-/* Анимации прелоадера */
+/* ------------------------------
+   Minimal Synaplink Preloader
+--------------------------------*/
 
-/* T1: Анимация бренда (0.8-2.0c) */
-.animate-brand {
-  animation: brandAppear 1.2s cubic-bezier(0.2,0.7,0,1) forwards;
+:root {
+  --dark: #0a0a0a;
+  --neon: #a6ff00;
 }
 
-@keyframes brandAppear {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-    letter-spacing: 0.15em;
-  }
-  30% {
-    opacity: 0.4;
-    transform: scale(0.88);
-    letter-spacing: 0.1em;
-  }
-  70% {
-    opacity: 0.8;
-    transform: scale(0.96);
-    letter-spacing: 0.04em;
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-    letter-spacing: 0.02em;
-  }
+.preloader-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-/* T2: Анимация stroke (0.5-1.6c) */
-.animate-stroke {
-  animation: strokeDraw 0.8s cubic-bezier(0.2,0.7,0,1) forwards;
-}
+.preloader-wrapper{flex-direction:column}
 
-@keyframes strokeDraw {
-  0% {
-    stroke-dashoffset: 1000;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* T3: Анимация прогресса */
-@keyframes progressOvershoot {
-  0% {
-    transform: scaleX(1);
-  }
-  90% {
-    transform: scaleX(1.05);
-  }
-  100% {
-    transform: scaleX(1);
-  }
-}
-
-/* T4: Исчезновение прелоадера */
-.preloader-hidden {
+/* Fade-in / out handled via Framer-motion but keep transition fallback */
+.preloader-wrapper.fade-out {
   opacity: 0;
-  backdrop-filter: blur(6px);
   transform: scale(0.95);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* T5: Появление главной */
-body.is-ready [data-fade] {
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+.logo {
+  font-family: 'Inter', 'Poppins', 'Roboto', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  letter-spacing: 0.12em;
+  color: #ffffff;                /* белые буквы */
+  text-shadow: 0 0 6px rgba(166,255,0,0.7), 0 0 14px rgba(166,255,0,0.5); /* салатовый неон */
+  text-transform: uppercase;
+  user-select: none;
+  animation:logoGlow 2.5s ease-in-out infinite;
+}
+@keyframes logoGlow{
+  0%,100%{text-shadow:0 0 6px rgba(166,255,0,.6),0 0 14px rgba(166,255,0,.4)}
+  50%{text-shadow:0 0 12px rgba(166,255,0,1),0 0 24px rgba(166,255,0,.8)}
 }
 
-body.is-ready [data-fade].fade-in {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
+/* Progress bar */
+.bar {
+  width:min(70vw,320px);height:10px;background:#1b1b1b;border-radius:9999px;box-shadow:0 0 6px rgba(0,0,0,.6) inset,0 0 8px rgba(166,255,0,.15);overflow:hidden}
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  background:linear-gradient(90deg,#59ff00 0%,#a6ff00 45%,#59ff00 100%);filter:drop-shadow(0 0 6px rgba(166,255,0,.8));transition:width 50ms linear;border-radius:inherit}
 
-/* Анимация точек */
-@keyframes blink {
-  0%, 100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.blink-dot {
-  animation: blink 0.12s ease-in-out infinite;
-}
-
-/* Улучшенные hover эффекты для карточек */
-.card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateY(0);
-}
-
-.card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* Улучшенные hover эффекты для иконок */
-.icon-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.icon-hover:hover {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 12px rgba(155, 239, 76, 0.6));
-}
-
-/* Улучшенные hover эффекты для кнопок */
-.button-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.button-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2);
-}
-
-/* Анимации появления */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Классы анимаций */
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s ease-out forwards;
-}
-
-/* Состояния по умолчанию */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-on-scroll.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Fallback для случаев, когда анимации не работают */
-@supports not (animation: brandAppear 0.7s cubic-bezier(0.2,0.7,0,1)) {
-  .animate-brand,
-  .animate-stroke,
-  .animate-fade-in-up,
-  .animate-fade-in,
-  .animate-scale-in {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  
-  .animate-on-scroll {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-  .preloader-logo {
-    font-size: 3rem;
-  }
-  
-  .preloader-progress {
-    width: 280px;
-  }
-}
-
-/* Поддержка prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .animate-brand,
-  .animate-stroke,
-  .animate-fade-in-up,
-  .animate-fade-in,
-  .animate-scale-in,
-  .card-hover,
-  .icon-hover,
-  .button-hover {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-  }
-  
-  .preloader {
-    animation-duration: 0.8s !important;
-  }
-}
+/* ---- neon progress ---- */
+.progress-wrapper{position:relative;display:inline-block;margin-top:2rem}
+.percent-text{position:absolute;top:-32px;left:0;transform:translateX(-50%);font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--neon);user-select:none}
+.arrow{position:absolute;top:-14px;left:0;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid var(--neon);filter:drop-shadow(0 0 6px rgba(166,255,0,.7))}
