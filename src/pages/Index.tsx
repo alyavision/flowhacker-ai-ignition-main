@@ -22,20 +22,16 @@ const TG_CHANNEL = ""; // TODO: вставить ссылку на Telegram-ка
 const WA_LINK = "https://wa.me/998000000000"; // placeholder, замените на реальный номер
 
 const Index = () => {
-  const [showAuditBar, setShowAuditBar] = useState(false);
   const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const IS_TG_READY = Boolean(TG_LINK);
   const IS_TG_CHANNEL_READY = Boolean(TG_CHANNEL);
 
-  useEffect(() => {
-    const onScroll = () => setShowAuditBar(window.scrollY > 180);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
-  // Активируем анимации после прелоадера
+
+    // Активируем анимации сразу после прелоадера
   useEffect(() => {
+    console.log('isPreloaderComplete', isPreloaderComplete);
     if (isPreloaderComplete) {
       // Добавляем класс is-ready к body
       document.body.classList.add('is-ready');
@@ -43,9 +39,12 @@ const Index = () => {
       // Активируем анимации для элементов с data-fade
       const fadeElements = document.querySelectorAll('[data-fade]');
       fadeElements.forEach((el, index) => {
+        // Сначала добавляем класс для анимации
+        el.classList.add('animate-on-load');
+        // Потом анимируем
         setTimeout(() => {
           el.classList.add('fade-in');
-        }, index * 90); // Стаггер 90ms между элементами
+        }, index * 30);
       });
     }
   }, [isPreloaderComplete]);
@@ -79,11 +78,11 @@ const Index = () => {
       {/* Sticky Header */}
       <header className="fixed top-0 left-0 right-0 z-40 border-b border-border bg-[#0A0A0A]/70 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/70" style={{ paddingTop: 'env(safe-area-inset-top)' }} data-fade>
         <div className="container mx-auto flex h-16 items-center justify-between">
-                      <a href="#hero" className="flex items-center gap-2 airy-link" aria-label="Synaplink AI">
-              <div className="h-8 w-8 rounded-md bg-lime-400 text-black grid place-items-center font-orbitron font-extrabold airy-element">SL</div>
-              <span className="font-orbitron text-lg hidden sm:block">Synaplink AI</span>
-            </a>
-          <nav className="hidden lg:flex items-center gap-6 text-sm">
+          <a href="#hero" className="flex items-center gap-2 airy-link" aria-label="Synaplink AI">
+            <div className="h-8 w-8 rounded-md bg-lime-400 text-black grid place-items-center font-orbitron font-extrabold airy-element">SL</div>
+            <span className="font-orbitron text-lg">Synaplink AI</span>
+          </a>
+          <nav className="hidden sm:flex items-center gap-6 text-sm">
             <a href="#services" className="story-link airy-link">Услуги</a>
             <a href="#pricing" className="story-link airy-link">Цены</a>
             <a href="#faq" className="story-link airy-link">FAQ</a>
@@ -107,19 +106,7 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Sticky top CTA bar */}
-      {showAuditBar && (
-        <div className="fixed top-16 left-0 right-0 z-[55] border-b border-border bg-[#0A0A0A]/80 backdrop-blur" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
-          <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between py-3 gap-3 text-sm">
-            <span className="text-muted-foreground airy-element">Готовы к росту? Бесплатный AI-аудит за 24 часа.</span>
-            <a href="#contact">
-              <Button size="sm" variant="secondary" className="airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold whitespace-nowrap">
-                Получить AI-аудит
-              </Button>
-            </a>
-          </div>
-        </div>
-      )}
+
 
       <main className="pt-16 sm:pt-24">
         {/* Hero */}
@@ -389,9 +376,6 @@ const Index = () => {
               </Card>
             ))}
           </div>
-          <div className="text-center mt-6 text-sm text-muted-foreground airy-element">
-            Готовы сделать быстрый прототип? — Получите готовое решение за 7–14 дней. <a href="#contact" className="text-accent underline-offset-4 hover:underline airy-link">Заказать прототип за 7 дней</a>
-          </div>
         </section>
 
         {/* Why us */}
@@ -471,22 +455,6 @@ const Index = () => {
               <Button type="submit" variant="secondary" className="airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold"><Send className="size-4 airy-icon"/> Оставить заявку — получить 15‑минутный звонок</Button>
             </div>
           </form>
-          <div className="grid md:grid-cols-2 gap-6 mt-8">
-            <Card>
-              <CardHeader><CardTitle className="airy-element">Контакты и социальные сети</CardTitle></CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted-foreground airy-element">
-                                                                      <div className="airy-element"><span className="font-medium">Telegram-бот:</span> {IS_TG_READY ? (<a className="text-lime-400 underline airy-link" href={TG_LINK} target="_blank" rel="noopener">перейти в бот</a>) : (<span className="opacity-70">скоро</span>)}</div>
-                  <div className="airy-element"><span className="font-medium">Telegram-канал:</span> {IS_TG_CHANNEL_READY ? (<a className="text-cyan-400 underline airy-link" href={TG_CHANNEL} target="_blank" rel="noopener">подписаться</a>) : (<span className="opacity-70">скоро</span>)}</div>
-                  <div className="airy-element"><span className="font-medium">Instagram:</span> <a className="text-lime-400 underline airy-link" href="https://instagram.com/synaplink" target="_blank" rel="noopener">@synaplink</a></div>
-                  <div className="airy-element"><span className="font-medium">WhatsApp:</span> <a className="text-cyan-400 underline airy-link" href={WA_LINK} target="_blank" rel="noopener">написать</a></div>
-                  <div className="airy-element"><span className="font-medium">Email:</span> <a className="text-lime-400 underline airy-link" href="mailto:hello@synaplink.ai">hello@synaplink.ai</a></div>
-                                  <div className="airy-element"><span className="font-medium">Телефон:</span> <a className="text-cyan-400 underline airy-link" href="tel:+998000000000">+998 00 000 00 00</a></div>
-                  <div className="airy-element"><span className="font-medium">Адрес:</span> Tashkent (placeholder)</div>
-              </CardContent>
-            </Card>
-            
-
-          </div>
         </section>
       </main>
 
@@ -503,20 +471,23 @@ const Index = () => {
           <div>
             <h4 className="font-semibold mb-3 airy-element">Быстрые ссылки</h4>
             <ul className="space-y-2 text-sm text-muted-foreground airy-element">
-              <li className="airy-element"><a href="#services" className="airy-link">Услуги</a></li>
-              <li className="airy-element"><a href="#pricing" className="airy-link">Прайс</a></li>
-              <li className="airy-element"><a href="#faq" className="airy-link">FAQ</a></li>
-              <li className="airy-element"><a href="/privacy" className="airy-link">Политика конфиденциальности</a></li>
+              <li className="airy-element"><a href="#services" className="airy-link w-[250px] inline-block">Услуги</a></li>
+              <li className="airy-element"><a href="#pricing" className="airy-link w-[250px] inline-block">Прайс</a></li>
+              <li className="airy-element"><a href="#faq" className="airy-link w-[250px] inline-block">FAQ</a></li>
+              <li className="airy-element"><a href="/privacy" className="airy-link w-[250px] inline-block">Политика конфиденциальности</a></li>
             </ul>
           </div>
           <div>
-                        <h4 className="font-semibold mb-3 airy-element">Контакты</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground airy-element">
-                                <li className="airy-element"><a href={TG_LINK} target="_blank" rel="noopener" className="text-lime-400 hover:text-cyan-400 airy-link">Telegram</a></li>
-                <li className="airy-element"><a href="mailto:hello@synaplink.ai" className="text-cyan-400 hover:text-lime-400 airy-link">hello@synaplink.ai</a></li>
-                <li className="airy-element"><a href="tel:+998000000000" className="text-lime-400 hover:text-cyan-400 airy-link">+998 00 000 00 00</a></li>
+              <h4 className="font-semibold mb-3 airy-element">Контакты</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground airy-element">
+                <li className="airy-element"><span className="font-medium">Telegram-бот:</span> {IS_TG_READY ? (<a className="text-lime-400 underline airy-link" href={TG_LINK} target="_blank" rel="noopener">перейти в бот</a>) : (<span className="opacity-70">скоро</span>)}</li>
+                <li className="airy-element"><span className="font-medium">Telegram-канал:</span> {IS_TG_CHANNEL_READY ? (<a className="text-cyan-400 underline airy-link" href={TG_CHANNEL} target="_blank" rel="noopener">подписаться</a>) : (<span className="opacity-70">скоро</span>)}</li>
+                <li className="airy-element"><a href={TG_LINK} target="_blank" rel="noopener" className="w-[150px] inline-block text-lime-400 hover:text-cyan-400 airy-link">Telegram</a></li>
+                <li className="airy-element"><a className="w-[150px] inline-block text-lime-400 hover:text-cyan-400 airy-link" href={WA_LINK} target="_blank" rel="noopener">WhatsApp</a></li>
+                <li className="airy-element"><a href="mailto:hello@synaplink.ai" className="w-[150px] inline-block text-lime-400 hover:text-cyan-400 airy-link">hello@synaplink.ai</a></li>
+                <li className="airy-element"><a href="tel:+998000000000" className="w-[150px] inline-block text-lime-400 hover:text-cyan-400 airy-link">+998 00 000 00 00</a></li>
                 <li className="airy-element">Tashkent (placeholder)</li>
-            </ul>
+              </ul>
           </div>
           {/* Соцсети перенесены в раздел Контакты выше */}
         </div>

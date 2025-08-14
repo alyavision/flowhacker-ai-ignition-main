@@ -25,7 +25,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onTo
       {/* Бургер кнопка */}
       <button
         onClick={onToggle}
-        className="lg:hidden fixed top-4 right-4 z-50 p-3 bg-background/80 backdrop-blur-md border border-border rounded-lg hover:bg-background/90 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-secondary focus-visible:outline-offset-2"
+        className="sm:hidden fixed top-2 right-4 z-50 p-3 bg-background/80 backdrop-blur-md border border-border rounded-lg hover:bg-background/90 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-secondary focus-visible:outline-offset-2"
         aria-label="Открыть меню"
         aria-expanded={isOpen}
       >
@@ -55,9 +55,10 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onTo
         <div className="flex flex-col h-full p-6">
           {/* Заголовок */}
           <div className="flex items-center justify-between mb-8">
-            <div className="text-xl font-bold bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent">
-              FlowHacker AI
-            </div>
+            <a href="#hero" className="flex items-center gap-2 airy-link" aria-label="Synaplink AI" onClick={onToggle}>
+              <div className="h-8 w-8 rounded-md bg-lime-400 text-black grid place-items-center font-orbitron font-extrabold airy-element">SL</div>
+              <span className="font-orbitron text-lg">Synaplink AI</span>
+            </a>
             <button
               onClick={onToggle}
               className="p-2 hover:bg-muted rounded-lg transition-colors"
@@ -112,7 +113,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onTo
               </h3>
               <div className="space-y-3">
                 <a 
-                  href="https://t.me/flowhacker" 
+                  href="https://t.me/synaplink" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   onClick={onToggle}

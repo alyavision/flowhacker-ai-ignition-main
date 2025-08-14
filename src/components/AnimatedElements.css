@@ -150,6 +150,28 @@
   transform: scale(1.2) rotate(5deg);
 }
 
+/* Стили для data-fade элементов */
+[data-fade] {
+  opacity: 1; /* Делаем видимыми по умолчанию */
+  transform: translateY(0); /* Без смещения по умолчанию */
+  transition: all 0.6s ease-out;
+}
+
+/* Анимация только при загрузке */
+[data-fade].animate-on-load {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+[data-fade].animate-on-load.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
 /* Анимация для кнопок */
 .button-animate {
   transition: all 0.3s ease;

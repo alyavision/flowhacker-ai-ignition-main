@@ -27,7 +27,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           setTimeout(() => {
             document.body.style.overflow = '';
             onComplete();
-          }, 600); // CSS transition time
+          }); // CSS transition time
           return 100;
         }
         return p + 1;
