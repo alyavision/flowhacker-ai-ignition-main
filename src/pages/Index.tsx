@@ -17,9 +17,10 @@ import "@/components/AiryAnimations.css";
 
 
 
-const TG_LINK = ""; // TODO: вставить ссылку на Telegram-бота
-const TG_CHANNEL = ""; // TODO: вставить ссылку на Telegram-канал
-const WA_LINK = "https://wa.me/998000000000"; // placeholder, замените на реальный номер
+const TG_LINK = "https://t.me//SynapLinkAi_bot";
+const TG_CHANNEL = "https://t.me//synaplinkai";
+const WA_LINK = "https://wa.me/998503030694";
+const IS_FEEDBACK_READY = false; // TODO: вставить true, если готов сервис для принятия формы обратной связи
 
 const Index = () => {
   const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
@@ -171,26 +172,14 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="text-center max-w-5xl mx-auto space-y-2 mb-6">
-              <p className="text-xl airy-element">
-                <span className="bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">
-                  <span className="font-semibold airy-element">Результат: +40–60% к продажам</span>
-                </span>
-              </p>
-              <p className="text-xl airy-element">
-                <span className="bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">
-                  <span className="font-semibold airy-element">экономия 10+ часов в неделю</span>
-                </span>
-              </p>
-              <p className="text-xl airy-element">
-                <span className="bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">
-                  <span className="font-semibold airy-element">рост прибыли на автопилоте</span>
-                </span>
-              </p>
-            </div>
-            
             <div className="flex flex-col sm:flex-row gap-4 justify-center" data-fade>
-              <Button variant="secondary" size="xl" className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold">
+              <Button onClick={() => {
+                  if (IS_TG_READY) {
+                    try { window.open(TG_LINK, "_blank"); } catch {}
+                  } else {
+                    toast({ title: "Скоро", description: "Telegram-бот в разработке." });
+                  }
+                }} variant="secondary" size="xl" className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold">
                 <Sparkles className="size-4 sm:size-5 mr-2 airy-icon"/> Получить бесплатный AI-аудит
               </Button>
               <Button
@@ -371,7 +360,15 @@ const Index = () => {
                   <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-5 airy-element">
                     {p.features.map((f,idx)=> <li key={idx} className="airy-element">{f}</li>)}
                   </ul>
-                                     <a href="#contact"><Button className="mt-6 w-full airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold" variant="secondary">{p.cta}</Button></a>
+                                                                           {IS_TG_READY ? (
+                                        <a href={TG_LINK} target="_blank" rel="noopener">
+                                          <Button className="mt-6 w-full airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold" variant="secondary">{p.cta}</Button>
+                                        </a>
+                                      ) : (
+                                        <a href="#contact">
+                                          <Button className="mt-6 w-full airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold" variant="secondary">{p.cta}</Button>
+                                        </a>
+                                      )}
                 </CardContent>
               </Card>
             ))}
@@ -426,36 +423,38 @@ const Index = () => {
         </section>
 
         {/* Contact form */}
-        <section id="contact" className="container mx-auto py-16 md:py-24 bg-[#0A0A0A]/70 relative z-[2]" data-fade>
-          <h2 className="text-2xl sm:text-3xl font-bold font-orbitron mb-6 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">Свяжитесь с нами</h2>
-          <p className="text-muted-foreground mb-6 airy-element">Оставьте заявку — получите 15‑минутный звонок. При нажатии вы перейдёте в наш Telegram-бот.</p>
-          <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
-            <div>
-              <Label htmlFor="name" className="airy-element">Имя</Label>
-              <Input required id="name" name="name" placeholder="Иван" className="airy-element" />
-            </div>
-            <div>
-              <Label htmlFor="company" className="airy-element">Компания</Label>
-              <Input id="company" name="company" placeholder="ООО Пример" className="airy-element" />
-            </div>
-            <div>
-              <Label htmlFor="email" className="airy-element">Email/Telegram</Label>
-              <Input required id="email" name="email" placeholder="hello@company.com / @username" className="airy-element" />
-            </div>
-            <div>
-              <Label htmlFor="phone" className="airy-element">Телефон</Label>
-              <Input id="phone" name="phone" placeholder="+998 XX XXX XX XX" className="airy-element" />
-            </div>
-            {/* Поля задачи/бюджета/реф удалены по требованию */}
-            <div className="md:col-span-2 flex items-center gap-2 text-sm">
-              <input id="policy" name="policy" type="checkbox" required className="h-4 w-4 airy-element" />
-              <label htmlFor="policy" className="airy-element">Согласен с <a className="text-accent underline airy-link" href="/privacy" target="_blank" rel="noopener">политикой конфиденциальности</a></label>
-            </div>
-            <div className="md:col-span-2">
-              <Button type="submit" variant="secondary" className="airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold"><Send className="size-4 airy-icon"/> Оставить заявку — получить 15‑минутный звонок</Button>
-            </div>
-          </form>
-        </section>
+        {IS_FEEDBACK_READY && (
+          <section id="contact" className="container mx-auto py-16 md:py-24 bg-[#0A0A0A]/70 relative z-[2]" data-fade>
+            <h2 className="text-2xl sm:text-3xl font-bold font-orbitron mb-6 bg-gradient-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent airy-element">Свяжитесь с нами</h2>
+            <p className="text-muted-foreground mb-6 airy-element">Оставьте заявку — получите 15‑минутный звонок. При нажатии вы перейдёте в наш Telegram-бот.</p>
+            <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
+              <div>
+                <Label htmlFor="name" className="airy-element">Имя</Label>
+                <Input required id="name" name="name" placeholder="Иван" className="airy-element" />
+              </div>
+              <div>
+                <Label htmlFor="company" className="airy-element">Компания</Label>
+                <Input id="company" name="company" placeholder="ООО Пример" className="airy-element" />
+              </div>
+              <div>
+                <Label htmlFor="email" className="airy-element">Email/Telegram</Label>
+                <Input required id="email" name="email" placeholder="hello@company.com / @username" className="airy-element" />
+              </div>
+              <div>
+                <Label htmlFor="phone" className="airy-element">Телефон</Label>
+                <Input id="phone" name="phone" placeholder="+998 XX XXX XX XX" className="airy-element" />
+              </div>
+              {/* Поля задачи/бюджета/реф удалены по требованию */}
+              <div className="md:col-span-2 flex items-center gap-2 text-sm">
+                <input id="policy" name="policy" type="checkbox" required className="h-4 w-4 airy-element" />
+                <label htmlFor="policy" className="airy-element">Согласен с <a className="text-accent underline airy-link" href="/privacy" target="_blank" rel="noopener">политикой конфиденциальности</a></label>
+              </div>
+              <div className="md:col-span-2">
+                <Button type="submit" variant="secondary" className="airy-gradient-button bg-gradient-to-r from-lime-400 to-cyan-400 hover:from-lime-500 hover:to-cyan-500 text-black font-semibold"><Send className="size-4 airy-icon"/> Оставить заявку — получить 15‑минутный звонок</Button>
+              </div>
+            </form>
+          </section>
+        )}
       </main>
 
       {/* Footer */}
@@ -480,18 +479,25 @@ const Index = () => {
           <div>
               <h4 className="font-semibold mb-3 airy-element">Контакты</h4>
               <ul className="space-y-2 text-sm text-muted-foreground airy-element">
-                <li className="airy-element"><span className="font-medium">Telegram-бот:</span> {IS_TG_READY ? (<a className="text-lime-400 underline airy-link" href={TG_LINK} target="_blank" rel="noopener">перейти в бот</a>) : (<span className="opacity-70">скоро</span>)}</li>
-                <li className="airy-element"><span className="font-medium">Telegram-канал:</span> {IS_TG_CHANNEL_READY ? (<a className="text-cyan-400 underline airy-link" href={TG_CHANNEL} target="_blank" rel="noopener">подписаться</a>) : (<span className="opacity-70">скоро</span>)}</li>
-                <li className="airy-element"><a href={TG_LINK} target="_blank" rel="noopener" className="w-[150px] inline-block text-lime-400 hover:text-cyan-400 airy-link">Telegram</a></li>
-                <li className="airy-element"><a className="w-[150px] inline-block text-lime-400 hover:text-cyan-400 airy-link" href={WA_LINK} target="_blank" rel="noopener">WhatsApp</a></li>
-                <li className="airy-element"><a href="mailto:hello@synaplink.ai" className="w-[150px] inline-block text-lime-400 hover:text-cyan-400 airy-link">hello@synaplink.ai</a></li>
-                <li className="airy-element"><a href="tel:+998000000000" className="w-[150px] inline-block text-lime-400 hover:text-cyan-400 airy-link">+998 00 000 00 00</a></li>
+                <li className="airy-element"><span className="font-medium">Telegram-бот:</span> {IS_TG_READY ? (<a className="text-lime-400 hover:text-cyan-400 airy-link" href={TG_LINK} target="_blank" rel="noopener">перейти в бот</a>) : (<span className="opacity-70">скоро</span>)}</li>
+                <li className="airy-element"><span className="font-medium">Telegram-канал:</span> {IS_TG_CHANNEL_READY ? (<a className="text-lime-400 hover:text-cyan-400 airy-link" href={TG_CHANNEL} target="_blank" rel="noopener">подписаться</a>) : (<span className="opacity-70">скоро</span>)}</li>
+                <li className="airy-element"><a href={TG_LINK} target="_blank" rel="noopener" className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link">Telegram</a></li>
+                <li className="airy-element"><a className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link" href={WA_LINK} target="_blank" rel="noopener">WhatsApp</a></li>
+                <li className="airy-element"><a href="mailto:hello@synaplink.ai" className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link">hello@synaplink.ai</a></li>
+                <li className="airy-element"><a href="tel:+998000000000" className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link">+998 00 000 00 00</a></li>
                 <li className="airy-element">Tashkent (placeholder)</li>
               </ul>
           </div>
           {/* Соцсети перенесены в раздел Контакты выше */}
         </div>
       </footer>
+
+      {/* Copyright */}
+      <div className="border-t border-border bg-[#0A0A0A]/90 relative z-[2] py-4" data-fade>
+        <div className="container mx-auto text-center">
+          <p className="text-sm text-muted-foreground airy-element">© 2025 SYNAPLINK. Все права защищены</p>
+        </div>
+      </div>
 
       {/* Floating chat buttons — удалены по требованию */}
 
