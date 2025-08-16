@@ -16,10 +16,11 @@ import "@/components/Preloader.css";
 import "@/components/AiryAnimations.css";
 
 
-
+const PHONE_NUMBER = "998503030694";
+const USER_FRIENDLY_PHONE_NUMBER = "+998 50 303 06 94";
 const TG_LINK = "https://t.me//SynapLinkAi_bot";
 const TG_CHANNEL = "https://t.me//synaplinkai";
-const WA_LINK = "https://wa.me/998503030694";
+const WA_LINK = `https://wa.me/${PHONE_NUMBER}`;
 const IS_FEEDBACK_READY = false; // TODO: вставить true, если готов сервис для принятия формы обратной связи
 
 const Index = () => {
@@ -73,7 +74,11 @@ const Index = () => {
       {/* Мобильная навигация */}
       <MobileNavigation 
         isOpen={isMobileMenuOpen} 
-        onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+        onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        tgLink={TG_LINK}
+        isTgReady={IS_TG_READY}
+        phoneNumber={PHONE_NUMBER}
+        userFriendlyPhoneNumber={USER_FRIENDLY_PHONE_NUMBER}
       />
       
       {/* Sticky Header */}
@@ -484,8 +489,8 @@ const Index = () => {
                 <li className="airy-element"><a href={TG_LINK} target="_blank" rel="noopener" className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link">Telegram</a></li>
                 <li className="airy-element"><a className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link" href={WA_LINK} target="_blank" rel="noopener">WhatsApp</a></li>
                 <li className="airy-element"><a href="mailto:hello@synaplink.ai" className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link">hello@synaplink.ai</a></li>
-                <li className="airy-element"><a href="tel:+998000000000" className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link">+998 00 000 00 00</a></li>
-                <li className="airy-element">Tashkent (placeholder)</li>
+                <li className="airy-element"><a href={`tel:+${PHONE_NUMBER}`} className="w-[210px] inline-block text-lime-400 hover:text-cyan-400 airy-link">{USER_FRIENDLY_PHONE_NUMBER}</a></li>
+                <li className="airy-element">г. Ташкент</li>
               </ul>
           </div>
           {/* Соцсети перенесены в раздел Контакты выше */}

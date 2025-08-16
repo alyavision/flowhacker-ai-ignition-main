@@ -4,9 +4,13 @@ import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 interface MobileNavigationProps {
   isOpen: boolean;
   onToggle: () => void;
+  tgLink?: string;
+  isTgReady?: boolean;
+  phoneNumber?: string;
+  userFriendlyPhoneNumber?: string;
 }
 
-export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onToggle }) => {
+export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onToggle, tgLink, isTgReady, phoneNumber, userFriendlyPhoneNumber }) => {
   // Блокируем скролл body при открытом меню
   useEffect(() => {
     if (isOpen) {
@@ -113,9 +117,9 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onTo
               </h3>
               <div className="space-y-3">
                 <a 
-                  href="https://t.me/synaplink" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  href={isTgReady && tgLink ? tgLink : "#contact"}
+                  target={isTgReady && tgLink ? "_blank" : undefined}
+                  rel={isTgReady && tgLink ? "noopener noreferrer" : undefined}
                   onClick={onToggle}
                   className="flex items-center gap-3 py-3 px-4 hover:bg-muted rounded-lg transition-colors focus-visible:bg-muted"
                 >
@@ -123,12 +127,12 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onTo
                   <span>Telegram</span>
                 </a>
                 <a 
-                  href="tel:+998000000000" 
+                  href={`tel:+${phoneNumber}`}
                   onClick={onToggle}
                   className="flex items-center gap-3 py-3 px-4 hover:bg-muted rounded-lg transition-colors focus-visible:bg-muted"
                 >
                   <Phone className="w-5 h-5 text-cyan-400" />
-                  <span>+998 00 000 00 00</span>
+                  <span>{userFriendlyPhoneNumber}</span>
                 </a>
               </div>
             </div>
