@@ -13,4 +13,5 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: /sitemap.xml
+Host: synaplink.network
+Sitemap: https://synaplink.network/sitemap.xml
